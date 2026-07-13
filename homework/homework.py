@@ -128,13 +128,11 @@ def limpiar_datos_credito(ruta_entrada, ruta_salida):
     if "ID" in df.columns:
         df = df.drop(columns=["ID"])
 
-    # Eliminamos únicamente los ceros de educación y matrimonio
     if "EDUCATION" in df.columns:
         df = df[df["EDUCATION"] != 0]
     if "MARRIAGE" in df.columns:
         df = df[df["MARRIAGE"] != 0]
 
-    # Agrupamos los valores mayores a 4 (5 y 6) en la categoría 4
     if "EDUCATION" in df.columns:
         df.loc[df["EDUCATION"] > 4, "EDUCATION"] = 4
         
@@ -174,7 +172,6 @@ def crear_y_optimizar_pipeline(X_train, y_train):
         ("classifier", MLPClassifier(
             max_iter=15000, 
             random_state=21, 
-            #early_stopping=False  # Permite converger por completo
         )),
     ])
 
